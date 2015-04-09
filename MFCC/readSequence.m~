@@ -1,6 +1,0 @@
-function [matrix]=readSequence(y,size,block)
-
-start_point=length(y)*1.0/block;
-for i=1:size
-    
-end
