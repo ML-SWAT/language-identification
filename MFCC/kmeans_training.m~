@@ -1,0 +1,4 @@
+function cluster_center_points= kmeans_training(features,cluster_number,)
+%kmeans on english vectors
+
+%kmeans on chinese vectors
