@@ -1,3 +1,3 @@
-function C= kmeans_training(features,cluster_number)
-repetition=5;
-[C]=kmeans_supervised(feature_matrix,cluster,repetition);
+function C= kmeans_training(features,cluster_number,repetition,maxIteration)
+% repetition=1;
+[C]=kmeans_supervised(features,cluster_number,repetition,maxIteration);
