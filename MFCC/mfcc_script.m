@@ -39,15 +39,15 @@ end
 C_english= kmeans_training(transformed_vectors_english,cluster_number,repetition,maxIteration);
 C_chinese= kmeans_training(transformed_vectors_chinese,cluster_number,repetition,maxIteration);
 
-chinese='/Users/JudeWang/Documents/language-identification/MFCC/test/1.mp3';
-english='/Users/JudeWang/Documents/language-identification/MFCC/test/2.mp3';
-
-label1=classification(C_english,C_chinese,chinese,size_of_window,block,mfcc_order);
-label2=classification(C_english,C_chinese,english,size_of_window,block,mfcc_order);
-
-
-label1;
-label2;
+% chinese='/Users/JudeWang/Documents/language-identification/MFCC/test/1.mp3';
+% english='/Users/JudeWang/Documents/language-identification/MFCC/test/2.mp3';
+% 
+% label1=classification(C_english,C_chinese,chinese,size_of_window,block,mfcc_order);
+% label2=classification(C_english,C_chinese,english,size_of_window,block,mfcc_order);
+% 
+% 
+% label1;
+% label2;
 
 
 
