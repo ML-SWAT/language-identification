@@ -31,21 +31,21 @@ for i = 1:length(fileList_english)
     
 end
 for i = 1:length(fileList_Tibetan)
-    [y,Fs] = audioread(strcat('Tibetan/',fileList_Tibetan(i).name));
     
+    [y,Fs] = audioread(strcat('Tibetan/',fileList_Tibetan(i).name));
     y=resample(y,8000,Fs);
     y=cutSilentAudio(y);
-    [matrix]=readSequence(y,size_of_window,block);
-    for j=1:size(matrix,1)
-        mfcc_matrix = msf_mfcc(matrix(i,:),8000);
-        transformed_vectors_Tibetan=[transformed_vectors_Tibetan;mfcc_matrix];
-    end
+    mfcc_matrix = msf_mfcc(y,8000,'ncep',13);
+    transformed_vectors_Tibetan=[transformed_vectors_Tibetan;mfcc_matrix];
+    %[matrix]=readSequence(y,size_of_window,block);
     
+    %mfcc_matrix = msf_mfcc(y,8000);
+    %transformed_vectors_english=[transformed_vectors_english;mfcc_matrix];
     
 end
 for i = 1:length(fileList_chinese)
     [y,Fs] = audioread(strcat('chinese/',fileList_chinese(i).name));
-    
+    y=(y(:,1)+y(:,2))/2;
     y=resample(y,8000,Fs);
     y=cutSilentAudio(y);
     [matrix]=readSequence(y,size_of_window,block);
