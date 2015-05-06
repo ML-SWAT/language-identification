@@ -81,7 +81,6 @@ function [ frames, indexes ] = vec2frames( vec, Nw, Ns, direction, window, paddi
     % input validation
     if( isempty(vec) || isempty(Nw) || isempty(Ns) ), error( usage ); end;
     if( min(size(vec))~=1 ), error( usage ); end;
-    %if( min(size(vec))~=2 ), error( usage ); end; %%for chinese
     if( Nw==0 || Ns==0 ), error( usage ); end;
 
     vec = vec(:);                       % ensure column vector
@@ -118,11 +117,11 @@ function [ frames, indexes ] = vec2frames( vec, Nw, Ns, direction, window, paddi
             % pad with a specific variance white Gaussian noise
             elseif( iscell(padding) && strcmp(padding{1},'noise') ) 
                 if( length(padding)>1 ), scale = padding{2}; 
-                else, scale = 1E-6; end;
+                else scale = 1E-6; end;
                 vec = [ vec; scale*randn(P,1) ];
 
             % if not padding required, decrement frame count
-            % (not very elegant solution)
+            % (not a very elegant solution)
             else
                 M = M-1;
 
@@ -177,4 +176,4 @@ function [ frames, indexes ] = vec2frames( vec, Nw, Ns, direction, window, paddi
     end
 
 
-% EOF 
+% EO

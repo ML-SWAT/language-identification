@@ -8,7 +8,7 @@
 
 %   Author: Kamil Wojcicki, September 2011
 
-function [ MFCCs, FBEs, frames ] = example(speech, fs)
+
     % Clean-up MATLAB's environment
     clear all; close all; clc;  
 
@@ -22,32 +22,18 @@ function [ MFCCs, FBEs, frames ] = example(speech, fs)
     L = 22;                 % cepstral sine lifter parameter
     LF = 300;               % lower frequency limit (Hz)
     HF = 3700;              % upper frequency limit (Hz)
-    hamming = @(N)(0.54-0.46*cos(2*pi*[0:N-1].'/(N-1)));
-    %wav_file = '20090526_atc_01.wav';  % input audio filename
-   % mp3_file = '1.mp3';
-   % mp3_file2 = '20090526_atc_01.mp3';
+    wav_file = 'sp10.wav';  % input audio filename
+
 
     % Read speech samples, sampling rate and precision from file
-   %[ speech, fs, nbits ] = wavread( wav_file );
-   % [speech, fs] = audioread(mp3_file);
-    %[speech1, fs1] = audioread(mp3_file2);
-
+    [ speech, fs, nbits ] = wavread( wav_file );
 
 
     % Feature extraction (feature vectors as columns)
     [ MFCCs, FBEs, frames ] = ...
-                    mfcc( speech, fs, Tw, Ts, alpha, hamming, [LF HF], M, C+1, L );
+                    mfcc( speech, fs, Tw, Ts, alpha, @hamming, [LF HF], M, C+1, L );
 
-% 
-%                 % Plot cepstrum over time
-%             figure('Position', [30 100 800 200], 'PaperPositionMode', 'auto', ... 
-%                    'color', 'w', 'PaperOrientation', 'landscape', 'Visible', 'on' ); 
-%         
-%             imagesc( [1:size(MFCCs,2)], [0:C-1], MFCCs ); 
-%             axis( 'xy' );
-%             xlabel( 'Frame index' ); 
-%             ylabel( 'Cepstrum index' );
-%             title( 'Mel frequency cepstrum' );
+
     % Generate data needed for plotting 
     [ Nw, NF ] = size( frames );                % frame length and number of frames
     time_frames = [0:NF-1]*Ts*0.001+0.5*Nw/fs;  % time vector (s) for frames 
@@ -91,7 +77,6 @@ function [ MFCCs, FBEs, frames ] = example(speech, fs)
     % Print figure to pdf and png files
     print('-dpdf', sprintf('%s.pdf', mfilename)); 
     print('-dpng', sprintf('%s.png', mfilename)); 
-end
 
 
 % EOF
